@@ -64,33 +64,48 @@ Welcome Back
 
 </h2>
 
-<form method="POST"
-      action="{{ url_for('auth.login') }}">
+<form method="POST" action="{{ url_for('auth.login') }}">
 
-{{ form.input(
-    "email",
-    "Email Address",
-    "email",
-    "Enter Email",
-    "",
-    True
-) }}
+    {{ form.input(
+        "email",
+        "Email Address",
+        "email",
+        "Enter your email",
+        "",
+        True
+    ) }}
 
-{{ form.input(
-    "password",
-    "Password",
-    "password",
-    "Enter Password",
-    "",
-    True
-) }}
+    {{ form.input(
+        "password",
+        "Password",
+        "password",
+        "Enter your password",
+        "",
+        True
+    ) }}
 
-{{ button.primary(
-    "Sign In",
-    "box-arrow-in-right",
-    "submit",
-    "w-100"
-) }}
+    <div class="form-check mb-3">
+        <input
+            class="form-check-input"
+            type="checkbox"
+            id="remember"
+            name="remember">
+
+        <label
+            class="form-check-label"
+            for="remember">
+
+            Remember Me
+
+        </label>
+    </div>
+
+    {{ button.primary(
+        "Sign In",
+        "box-arrow-in-right",
+        "submit",
+        "w-100"
+    ) }}
 
 </form>
 

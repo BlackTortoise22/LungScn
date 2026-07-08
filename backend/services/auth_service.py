@@ -20,4 +20,3 @@ class AuthService:
             return None
 
         return User(user)
-   

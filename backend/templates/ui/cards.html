@@ -1,66 +1,34 @@
-{# =========================================================
-   LungUI - Cards
-========================================================= #}
-
-{% macro dashboard_card(title,value,icon,color="primary") %}
+{% macro dashboard_card(title, value, icon, color="primary") %}
 
 <div class="col-lg-3 col-md-6">
 
-<div class="card dashboard-card h-100">
+    <div class="card shadow-sm border-0 h-100">
 
-<div class="card-body">
+        <div class="card-body">
 
-<div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center">
 
-<div>
+                <div>
 
-<p class="text-muted mb-1">
+                    <p class="text-muted mb-1">
+                        {{ title }}
+                    </p>
 
-{{ title }}
+                    <h2 class="fw-bold mb-0">
+                        {{ value }}
+                    </h2>
 
-</p>
+                </div>
 
-<h2 class="dashboard-number">
+                <div class="fs-1 text-{{ color }}">
+                    <i class="bi bi-{{ icon }}"></i>
+                </div>
 
-{{ value }}
+            </div>
 
-</h2>
+        </div>
 
-</div>
-
-<div>
-
-<i class="bi bi-{{ icon }} text-{{ color }} fs-1"></i>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-{% endmacro %}
-
-
-
-{% macro simple(title) %}
-
-<div class="card">
-
-<div class="card-header">
-
-<strong>{{ title }}</strong>
-
-</div>
-
-<div class="card-body">
-
-{{ caller() }}
-
-</div>
+    </div>
 
 </div>
 

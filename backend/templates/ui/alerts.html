@@ -1,17 +1,12 @@
-{% macro alert(message,type="success") %}
+{% macro message(text,type="success") %}
 
 <div class="alert alert-{{ type }} alert-dismissible fade show">
 
-{{ message }}
+{{ text }}
 
 <button
-
-type="button"
-
 class="btn-close"
-
 data-bs-dismiss="alert">
-
 </button>
 
 </div>

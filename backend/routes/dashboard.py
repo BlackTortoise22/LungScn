@@ -6,7 +6,10 @@ dashboard_bp = Blueprint(
     url_prefix="/dashboard"
 )
 
+from flask_login import login_required
+
 @dashboard_bp.route("/")
+@login_required
 def dashboard():
 
     return render_template(

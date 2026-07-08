@@ -4,10 +4,15 @@ from flask import (
     request,
     redirect,
     url_for,
-    flash
+    flash,
 )
 
-from flask_login import login_user, logout_user
+from flask_login import (
+    login_user,
+    logout_user,
+    login_required,
+    current_user,
+)
 
 from backend.services.auth_service import AuthService
 
@@ -21,62 +26,65 @@ auth_bp = Blueprint(
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
 
-    if request.method == "GET":
+    if current_user.is_authenticated:
+        return redirect(url_for("dashboard.dashboard"))
 
-        return render_template(
-            "auth/login.html"
+    if request.method == "POST":
+
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        if not email or not password:
+
+            flash(
+                "Please enter email and password.",
+                "danger",
+            )
+
+            return render_template("auth/login.html")
+
+        user = AuthService.authenticate(
+            email,
+            password,
         )
 
-    email = request.form.get("email")
-    password = request.form.get("password")
+        if user:
 
-    if not email or not password:
+            remember = request.form.get("remember") == "on"
+
+            login_user(
+                user,
+                remember=remember,
+            )
+
+            flash(
+                f"Welcome back, {user.full_name}!",
+                "success",
+            )
+
+            return redirect(
+                url_for("dashboard.dashboard")
+            )
 
         flash(
-            "Please enter Email and Password.",
-            "danger"
+            "Invalid email or password.",
+            "danger",
         )
 
-        return redirect(
-            url_for("auth.login")
-        )
-
-    user = AuthService.authenticate(
-        email,
-        password
-    )
-
-    if user is None:
-
-        flash(
-            "Invalid Email or Password.",
-            "danger"
-        )
-
-        return redirect(
-            url_for("auth.login")
-        )
-
-    login_user(user)
-
-    flash(
-        f"Welcome {user.full_name}",
-        "success"
-    )
-
-    return redirect(
-        url_for("dashboard.dashboard")
+    return render_template(
+        "auth/login.html"
     )
 
 
 @auth_bp.route("/logout")
+@login_required
 def logout():
 
     logout_user()
 
     flash(
         "Logged out successfully.",
-        "success"
+        "success",
     )
 
     return redirect(

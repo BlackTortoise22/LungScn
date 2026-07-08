@@ -1,8 +1,6 @@
 {% macro page(title,subtitle="") %}
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-
-<div>
+<div class="mb-4">
 
 <h2 class="page-title">
 
@@ -19,10 +17,6 @@
 </p>
 
 {% endif %}
-
-</div>
-
-{{ caller() if caller }}
 
 </div>
 
