@@ -1,0 +1,21 @@
+.dashboard-card{
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.dashboard-number{
+
+    font-size:34px;
+
+    font-weight:700;
+
+}

@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 dashboard_bp = Blueprint(
     "dashboard",
@@ -6,7 +6,9 @@ dashboard_bp = Blueprint(
     url_prefix="/dashboard"
 )
 
-
 @dashboard_bp.route("/")
-def dashboard_home():
-    return "Dashboard Module Working"
+def dashboard():
+
+    return render_template(
+        "dashboard/dashboard.html"
+    )

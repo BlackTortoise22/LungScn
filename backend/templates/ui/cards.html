@@ -1,0 +1,67 @@
+{# =========================================================
+   LungUI - Cards
+========================================================= #}
+
+{% macro dashboard_card(title,value,icon,color="primary") %}
+
+<div class="col-lg-3 col-md-6">
+
+<div class="card dashboard-card h-100">
+
+<div class="card-body">
+
+<div class="d-flex justify-content-between align-items-center">
+
+<div>
+
+<p class="text-muted mb-1">
+
+{{ title }}
+
+</p>
+
+<h2 class="dashboard-number">
+
+{{ value }}
+
+</h2>
+
+</div>
+
+<div>
+
+<i class="bi bi-{{ icon }} text-{{ color }} fs-1"></i>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endmacro %}
+
+
+
+{% macro simple(title) %}
+
+<div class="card">
+
+<div class="card-header">
+
+<strong>{{ title }}</strong>
+
+</div>
+
+<div class="card-body">
+
+{{ caller() }}
+
+</div>
+
+</div>
+
+{% endmacro %}

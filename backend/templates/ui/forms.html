@@ -1,0 +1,91 @@
+{# =========================================================
+   LungUI - Forms
+========================================================= #}
+
+{% macro input(name,label,type="text",placeholder="",value="",required=False) %}
+
+<div class="mb-3">
+
+<label class="form-label">
+
+{{ label }}
+
+</label>
+
+<input
+
+type="{{ type }}"
+
+name="{{ name }}"
+
+value="{{ value }}"
+
+placeholder="{{ placeholder }}"
+
+class="form-control"
+
+{% if required %}required{% endif %}
+
+>
+
+</div>
+
+{% endmacro %}
+
+
+
+{% macro textarea(name,label,rows=4) %}
+
+<div class="mb-3">
+
+<label class="form-label">
+
+{{ label }}
+
+</label>
+
+<textarea
+
+class="form-control"
+
+rows="{{ rows }}"
+
+name="{{ name }}">
+
+</textarea>
+
+</div>
+
+{% endmacro %}
+
+
+
+{% macro select(name,label,options=[]) %}
+
+<div class="mb-3">
+
+<label class="form-label">
+
+{{ label }}
+
+</label>
+
+<select class="form-select"
+
+name="{{ name }}">
+
+{% for option in options %}
+
+<option value="{{ option }}">
+
+{{ option }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+{% endmacro %}

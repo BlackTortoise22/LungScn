@@ -1,0 +1,29 @@
+{% macro page(title,subtitle="") %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<div>
+
+<h2 class="page-title">
+
+{{ title }}
+
+</h2>
+
+{% if subtitle %}
+
+<p class="text-muted">
+
+{{ subtitle }}
+
+</p>
+
+{% endif %}
+
+</div>
+
+{{ caller() if caller }}
+
+</div>
+
+{% endmacro %}

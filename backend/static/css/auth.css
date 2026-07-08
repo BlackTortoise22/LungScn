@@ -1,0 +1,47 @@
+.login-section{
+
+background:linear-gradient(
+
+135deg,
+
+#EFF6FF,
+
+#DBEAFE
+
+);
+
+}
+
+.login-left{
+
+padding:50px;
+
+}
+
+.login-left h1{
+
+font-size:48px;
+
+font-weight:700;
+
+}
+
+.login-left p{
+
+font-size:18px;
+
+color:#64748B;
+
+}
+
+.login-card{
+
+background:white;
+
+padding:50px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}

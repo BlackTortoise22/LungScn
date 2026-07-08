@@ -1,0 +1,42 @@
+{# =========================================================
+   LungUI - Buttons
+========================================================= #}
+
+{% macro primary(text, icon="", type="button", classes="") %}
+<button type="{{ type }}" class="btn btn-primary {{ classes }}">
+    {% if icon %}
+        <i class="bi bi-{{ icon }} me-2"></i>
+    {% endif %}
+    {{ text }}
+</button>
+{% endmacro %}
+
+
+{% macro secondary(text, icon="", type="button", classes="") %}
+<button type="{{ type }}" class="btn btn-outline-secondary {{ classes }}">
+    {% if icon %}
+        <i class="bi bi-{{ icon }} me-2"></i>
+    {% endif %}
+    {{ text }}
+</button>
+{% endmacro %}
+
+
+{% macro success(text, icon="", type="button", classes="") %}
+<button type="{{ type }}" class="btn btn-success {{ classes }}">
+    {% if icon %}
+        <i class="bi bi-{{ icon }} me-2"></i>
+    {% endif %}
+    {{ text }}
+</button>
+{% endmacro %}
+
+
+{% macro danger(text, icon="", type="button", classes="") %}
+<button type="{{ type }}" class="btn btn-danger {{ classes }}">
+    {% if icon %}
+        <i class="bi bi-{{ icon }} me-2"></i>
+    {% endif %}
+    {{ text }}
+</button>
+{% endmacro %}

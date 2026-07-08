@@ -1,0 +1,69 @@
+@import url('variables.css');
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+}
+
+a{
+
+    text-decoration:none;
+
+}
+
+.card{
+
+    border:none;
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+}
+
+.btn{
+
+    border-radius:10px;
+
+}
+
+.form-control{
+
+    border-radius:10px;
+
+}
+
+.form-select{
+
+    border-radius:10px;
+
+}
+
+.table{
+
+    background:white;
+
+    border-radius:var(--radius);
+
+}
+
+.page-title{
+
+    font-size:30px;
+
+    font-weight:600;
+
+}
+
+.section-title{
+
+    font-size:22px;
+
+    font-weight:600;
+
+}

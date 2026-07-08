@@ -1,0 +1,23 @@
+{% macro status(status) %}
+
+{% set colors = {
+
+'Normal':'success',
+
+'COVID-19':'danger',
+
+'Tuberculosis':'warning',
+
+'Viral Pneumonia':'info',
+
+'Bacterial Pneumonia':'primary'
+
+} %}
+
+<span class="badge bg-{{ colors.get(status,'secondary') }}">
+
+{{ status }}
+
+</span>
+
+{% endmacro %}
