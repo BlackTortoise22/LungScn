@@ -1,0 +1,48 @@
+{% extends "layouts/dashboard_base.html" %}
+{% import "ui/badges.html" as badge %}
+
+{% block title %}Prediction Result{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/prediction.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="page-title mb-1">Prediction Result</h2>
+        <p class="text-muted mb-0">AI-assisted output for {{ result.patient }}.</p>
+    </div>
+    <a class="btn btn-outline-secondary" href="{{ url_for('report.report_home') }}">
+        <i class="bi bi-file-earmark-medical me-2"></i>Reports
+    </a>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="scan-preview scan-preview-large">
+            <i class="bi bi-lungs-fill"></i>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card h-100">
+            <div class="card-body">
+                <span class="text-muted small">Detected finding</span>
+                <h3 class="mt-1">{{ badge.status(result.disease) }}</h3>
+                <div class="result-grid mt-4">
+                    <div>
+                        <span>Confidence</span>
+                        <strong>{{ result.confidence }}</strong>
+                    </div>
+                    <div>
+                        <span>Model version</span>
+                        <strong>{{ result.model_version }}</strong>
+                    </div>
+                </div>
+                <hr>
+                <p class="mb-0 text-muted">{{ result.explanation }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

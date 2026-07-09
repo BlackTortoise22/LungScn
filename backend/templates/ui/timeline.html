@@ -1,0 +1,10 @@
+{% macro timeline(items) %}
+<div class="timeline">
+    {% for item in items %}
+        <div class="border-start ps-3 pb-3">
+            <strong>{{ item.title }}</strong>
+            <p class="text-muted mb-0">{{ item.description }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endmacro %}

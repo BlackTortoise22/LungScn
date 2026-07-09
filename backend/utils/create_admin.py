@@ -1,41 +1,40 @@
 from flask_bcrypt import generate_password_hash
-from backend.database.db import get_connection
 
-connection = get_connection()
-cursor = connection.cursor(dictionary=True)
+from backend.database.db import db_cursor
 
-email = "admin@lungscan.com"
 
-cursor.execute(
-    "SELECT * FROM users WHERE email=%s",
-    (email,)
-)
+def create_admin():
+    email = "admin@lungscan.com"
 
-existing_user = cursor.fetchone()
+    with db_cursor() as cursor:
+        cursor.execute(
+            "SELECT * FROM users WHERE email=%s",
+            (email,),
+        )
 
-if existing_user:
-    print("✅ Admin already exists.")
+        if cursor.fetchone():
+            print("Admin already exists.")
+            return
 
-else:
-    password = generate_password_hash("admin123").decode("utf-8")
+        password = generate_password_hash("admin123").decode("utf-8")
 
-    cursor.execute("""
-        INSERT INTO users
-        (full_name, email, password, role)
+        cursor.execute(
+            """
+            INSERT INTO users
+            (full_name, email, password, role)
+            VALUES
+            (%s, %s, %s, %s)
+            """,
+            (
+                "Administrator",
+                email,
+                password,
+                "Admin",
+            ),
+        )
 
-        VALUES
-        (%s, %s, %s, %s)
-    """,
-    (
-        "Administrator",
-        email,
-        password,
-        "Admin"
-    ))
+    print("Admin created successfully.")
 
-    connection.commit()
 
-    print("✅ Admin created successfully.")
-
-cursor.close()
-connection.close()
+if __name__ == "__main__":
+    create_admin()

@@ -12,4 +12,23 @@
 
 }
 
+.hero-section{
+
+    min-height:auto;
+
+}
+
+.scan-preview,
+.scan-preview-large{
+
+    min-height:220px;
+
+}
+
+.result-grid{
+
+    grid-template-columns:1fr;
+
+}
+
 }

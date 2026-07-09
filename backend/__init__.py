@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
@@ -21,6 +21,7 @@ def load_user(user_id):
 
 
 def create_app():
+    Config.validate()
 
     app = Flask(__name__)
 
@@ -46,5 +47,25 @@ def create_app():
     app.register_blueprint(patient_bp)
     app.register_blueprint(prediction_bp)
     app.register_blueprint(report_bp)
+
+    @app.route("/")
+    def home():
+        return render_template("home/index.html")
+
+    @app.route("/about")
+    def about():
+        return render_template("about/about.html")
+
+    @app.route("/contact")
+    def contact():
+        return render_template("contact/contact.html")
+
+    @app.errorhandler(404)
+    def not_found(error):
+        return render_template("errors/404.html"), 404
+
+    @app.errorhandler(500)
+    def server_error(error):
+        return render_template("errors/500.html"), 500
 
     return app

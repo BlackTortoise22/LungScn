@@ -1,0 +1,51 @@
+{% extends "layouts/dashboard_base.html" %}
+{% import "ui/badges.html" as badge %}
+
+{% block title %}Patients{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/patients.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="page-title mb-1">Patients</h2>
+        <p class="text-muted mb-0">Track registrations, contact details, and recent scan findings.</p>
+    </div>
+    <a class="btn btn-primary" href="{{ url_for('patient.add_patient') }}">
+        <i class="bi bi-person-plus me-2"></i>Add patient
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+                        <th>Last scan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                    <tr>
+                        <td class="fw-semibold">{{ patient.code }}</td>
+                        <td>{{ patient.name }}</td>
+                        <td>{{ patient.age }}</td>
+                        <td>{{ patient.gender }}</td>
+                        <td>{{ patient.phone }}</td>
+                        <td>{{ badge.status(patient.last_scan) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

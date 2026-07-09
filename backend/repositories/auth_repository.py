@@ -1,50 +1,32 @@
-from backend.database.db import get_connection
+from backend.database.db import db_cursor
 
 
 class AuthRepository:
 
     @staticmethod
     def get_user_by_email(email):
+        with db_cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT *
+                FROM users
+                WHERE email=%s
+                """,
+                (email,)
+            )
 
-        connection = get_connection()
-
-        cursor = connection.cursor(dictionary=True)
-
-        cursor.execute(
-            """
-            SELECT *
-            FROM users
-            WHERE email=%s
-            """,
-            (email,)
-        )
-
-        user = cursor.fetchone()
-
-        cursor.close()
-        connection.close()
-
-        return user
+            return cursor.fetchone()
 
     @staticmethod
     def get_user_by_id(user_id):
+        with db_cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT *
+                FROM users
+                WHERE user_id=%s
+                """,
+                (user_id,)
+            )
 
-        connection = get_connection()
-
-        cursor = connection.cursor(dictionary=True)
-
-        cursor.execute(
-            """
-            SELECT *
-            FROM users
-            WHERE user_id=%s
-            """,
-            (user_id,)
-        )
-
-        user = cursor.fetchone()
-
-        cursor.close()
-        connection.close()
-
-        return user
+            return cursor.fetchone()

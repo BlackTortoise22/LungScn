@@ -1,0 +1,35 @@
+{% extends "layouts/dashboard_base.html" %}
+{% import "ui/forms.html" as form %}
+{% import "ui/buttons.html" as button %}
+
+{% block title %}Add Patient{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/patients.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h2 class="page-title mb-1">Add Patient</h2>
+    <p class="text-muted mb-0">Capture core patient details before uploading a chest X-ray.</p>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form>
+            <div class="row">
+                <div class="col-md-6">{{ form.input("full_name", "Full name", "text", "Patient full name", "", True) }}</div>
+                <div class="col-md-3">{{ form.input("age", "Age", "number", "Age", "", True) }}</div>
+                <div class="col-md-3">{{ form.select("gender", "Gender", ["Male", "Female", "Other"]) }}</div>
+                <div class="col-md-6">{{ form.input("phone", "Phone", "tel", "Phone number", "", True) }}</div>
+                <div class="col-md-6">{{ form.input("email", "Email", "email", "Optional email") }}</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Symptoms</label>
+                <textarea class="form-control" rows="4" placeholder="Cough, fever, shortness of breath..."></textarea>
+            </div>
+            {{ button.primary("Save patient", "check2", "button") }}
+        </form>
+    </div>
+</div>
+{% endblock %}

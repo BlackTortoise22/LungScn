@@ -1,0 +1,53 @@
+{% extends "layouts/dashboard_base.html" %}
+
+{% block title %}New Scan{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/prediction.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h2 class="page-title mb-1">New Scan</h2>
+    <p class="text-muted mb-0">Upload a chest X-ray and attach it to an existing patient record.</p>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card h-100">
+            <div class="card-body">
+                <label class="form-label">Patient</label>
+                <select class="form-select mb-3">
+                    <option>Jane Smith - LS-1002</option>
+                    <option>John Doe - LS-1001</option>
+                    <option>Alex Johnson - LS-1003</option>
+                </select>
+
+                <label class="upload-zone" for="scanFile">
+                    <i class="bi bi-cloud-arrow-up"></i>
+                    <strong>Choose X-ray image</strong>
+                    <span>PNG, JPG, or JPEG up to 16 MB</span>
+                </label>
+                <input class="d-none" id="scanFile" type="file" accept=".png,.jpg,.jpeg">
+
+                <a class="btn btn-primary mt-3" href="{{ url_for('prediction.prediction_result') }}">
+                    <i class="bi bi-magic me-2"></i>Run demo analysis
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card h-100">
+            <div class="card-body">
+                <h3 class="h5">Review checklist</h3>
+                <ul class="list-unstyled mt-3 mb-0 checklist">
+                    <li><i class="bi bi-check-circle"></i> Confirm patient identity</li>
+                    <li><i class="bi bi-check-circle"></i> Use frontal chest X-ray images</li>
+                    <li><i class="bi bi-check-circle"></i> Review AI output clinically</li>
+                    <li><i class="bi bi-check-circle"></i> Generate report after validation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

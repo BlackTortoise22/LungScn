@@ -1,0 +1,48 @@
+{% extends "layouts/dashboard_base.html" %}
+{% import "ui/badges.html" as badge %}
+
+{% block title %}Reports{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h2 class="page-title mb-1">Reports</h2>
+    <p class="text-muted mb-0">Review generated diagnostic report history.</p>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Report ID</th>
+                        <th>Patient</th>
+                        <th>Finding</th>
+                        <th>Generated</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for report in reports %}
+                    <tr>
+                        <td class="fw-semibold">{{ report.id }}</td>
+                        <td>{{ report.patient }}</td>
+                        <td>{{ badge.status(report.finding) }}</td>
+                        <td>{{ report.generated_at }}</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-secondary" type="button">
+                                <i class="bi bi-download"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

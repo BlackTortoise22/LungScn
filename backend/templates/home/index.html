@@ -1,0 +1,53 @@
+{% extends "layouts/public_base.html" %}
+
+{% block title %}LungScan AI{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container py-5">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <p class="text-primary fw-semibold mb-2">Clinical imaging workspace</p>
+                <h1 class="display-5 fw-bold mb-3">LungScan AI</h1>
+                <p class="lead text-muted mb-4">
+                    Manage patients, review chest X-ray predictions, and prepare consistent diagnostic reports from one focused dashboard.
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                    <a class="btn btn-primary" href="{{ url_for('auth.login') }}">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign in
+                    </a>
+                    <a class="btn btn-outline-secondary" href="{{ url_for('about') }}">Learn more</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-panel">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <span class="text-muted small">Latest scan</span>
+                            <h3 class="h5 mb-0">Chest X-ray review</h3>
+                        </div>
+                        <span class="badge bg-success">Normal</span>
+                    </div>
+                    <div class="scan-preview">
+                        <i class="bi bi-lungs-fill"></i>
+                    </div>
+                    <div class="row g-3 mt-3">
+                        <div class="col-6">
+                            <div class="metric-box">
+                                <span>Confidence</span>
+                                <strong>99.2%</strong>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="metric-box">
+                                <span>Report status</span>
+                                <strong>Ready</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

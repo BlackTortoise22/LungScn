@@ -1,0 +1,43 @@
+{% extends "layouts/dashboard_base.html" %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/analytics.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h2 class="page-title mb-1">Analytics</h2>
+    <p class="text-muted mb-0">Snapshot of scan volume and prediction distribution.</p>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card h-100">
+            <div class="card-body">
+                <h3 class="h5 mb-4">Monthly scan volume</h3>
+                <div class="bar-chart">
+                    <span style="height: 45%"></span>
+                    <span style="height: 64%"></span>
+                    <span style="height: 52%"></span>
+                    <span style="height: 78%"></span>
+                    <span style="height: 69%"></span>
+                    <span style="height: 88%"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h3 class="h5 mb-4">Finding mix</h3>
+                <div class="finding-row"><span>Normal</span><strong>77%</strong></div>
+                <div class="finding-row"><span>Pneumonia</span><strong>14%</strong></div>
+                <div class="finding-row"><span>Tuberculosis</span><strong>6%</strong></div>
+                <div class="finding-row"><span>COVID-19</span><strong>3%</strong></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

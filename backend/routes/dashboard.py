@@ -15,3 +15,9 @@ def dashboard():
     return render_template(
         "dashboard/dashboard.html"
     )
+
+
+@dashboard_bp.route("/analytics")
+@login_required
+def analytics():
+    return render_template("analytics/analytics.html")

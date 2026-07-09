@@ -1,122 +1,46 @@
 {% extends "layouts/public_base.html" %}
-
 {% import "ui/forms.html" as form %}
-
 {% import "ui/buttons.html" as button %}
 
-{% block title %}
-
-Login
-
-{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
-
 <section class="login-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="login-left">
+                    <h1>AI-Powered Lung Disease Detection</h1>
+                    <p>Upload chest X-rays, receive AI-assisted analysis, and generate professional reports.</p>
 
-<div class="container">
+                    <div class="mt-5 feature-list">
+                        <div><i class="bi bi-check-circle-fill me-2"></i>Multi-disease detection</div>
+                        <div><i class="bi bi-check-circle-fill me-2"></i>Grad-CAM explainability</div>
+                        <div><i class="bi bi-check-circle-fill me-2"></i>Patient management</div>
+                        <div><i class="bi bi-check-circle-fill me-2"></i>AI-assisted reports</div>
+                    </div>
+                </div>
+            </div>
 
-<div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="login-card">
+                    <h2 class="mb-4">Welcome Back</h2>
+                    {% include "components/alerts.html" %}
 
-<div class="col-lg-6">
+                    <form method="POST" action="{{ url_for('auth.login') }}">
+                        {{ form.input("email", "Email Address", "email", "Enter your email", "", True) }}
+                        {{ form.input("password", "Password", "password", "Enter your password", "", True) }}
 
-<div class="login-left">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                            <label class="form-check-label" for="remember">Remember Me</label>
+                        </div>
 
-<h1>
-
-AI-Powered Lung Disease Detection
-
-</h1>
-
-<p>
-
-Upload chest X-rays.
-
-Receive AI-assisted analysis.
-
-Generate professional reports.
-
-</p>
-
-<div class="mt-5">
-
-<div>✔ Multi Disease Detection</div>
-
-<div>✔ Grad-CAM Explainability</div>
-
-<div>✔ Patient Management</div>
-
-<div>✔ AI Generated Reports</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="col-lg-6">
-
-<div class="login-card">
-
-<h2 class="mb-4">
-
-Welcome Back
-
-</h2>
-
-<form method="POST" action="{{ url_for('auth.login') }}">
-
-    {{ form.input(
-        "email",
-        "Email Address",
-        "email",
-        "Enter your email",
-        "",
-        True
-    ) }}
-
-    {{ form.input(
-        "password",
-        "Password",
-        "password",
-        "Enter your password",
-        "",
-        True
-    ) }}
-
-    <div class="form-check mb-3">
-        <input
-            class="form-check-input"
-            type="checkbox"
-            id="remember"
-            name="remember">
-
-        <label
-            class="form-check-label"
-            for="remember">
-
-            Remember Me
-
-        </label>
+                        {{ button.primary("Sign In", "box-arrow-in-right", "submit", "w-100") }}
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-    {{ button.primary(
-        "Sign In",
-        "box-arrow-in-right",
-        "submit",
-        "w-100"
-    ) }}
-
-</form>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </section>
-
 {% endblock %}
