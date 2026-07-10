@@ -1,35 +1,183 @@
 {% extends "layouts/dashboard_base.html" %}
-{% import "ui/forms.html" as form %}
-{% import "ui/buttons.html" as button %}
 
 {% block title %}Add Patient{% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/patients.css') }}">
-{% endblock %}
-
 {% block content %}
-<div class="mb-4">
-    <h2 class="page-title mb-1">Add Patient</h2>
-    <p class="text-muted mb-0">Capture core patient details before uploading a chest X-ray.</p>
+
+<div class="container-fluid">
+
+    <div class="row mb-4">
+
+        <div class="col">
+
+            <h2 class="page-title">
+                Add New Patient
+            </h2>
+
+            <p class="text-muted">
+                Register a new patient into LungScan.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="full_name"
+                            value="{{ form.full_name if form else '' }}"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label">
+                            Age
+                        </label>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="age"
+                            min="1"
+                            max="120"
+                            value="{{ form.age if form else '' }}"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <label class="form-label">
+                            Gender
+                        </label>
+
+                        <select
+                            class="form-select"
+                            name="gender"
+                            required>
+
+                            <option value="">Select</option>
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Phone
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="phone"
+                            value="{{ form.phone if form else '' }}"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            value="{{ form.email if form else '' }}">
+
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Address
+                    </label>
+
+                    <textarea
+                        class="form-control"
+                        rows="2"
+                        name="address">{{ form.address if form else '' }}</textarea>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+                        Symptoms
+                    </label>
+
+                    <textarea
+                        class="form-control"
+                        rows="4"
+                        name="symptoms">{{ form.symptoms if form else '' }}</textarea>
+
+                </div>
+
+                <div class="d-flex justify-content-end">
+
+                    <a
+                        href="{{ url_for('patient.patient_home') }}"
+                        class="btn btn-outline-secondary me-2">
+
+                        Cancel
+
+                    </a>
+
+                    <button
+                        class="btn btn-primary"
+                        type="submit">
+
+                        Save Patient
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
 </div>
 
-<div class="card">
-    <div class="card-body">
-        <form>
-            <div class="row">
-                <div class="col-md-6">{{ form.input("full_name", "Full name", "text", "Patient full name", "", True) }}</div>
-                <div class="col-md-3">{{ form.input("age", "Age", "number", "Age", "", True) }}</div>
-                <div class="col-md-3">{{ form.select("gender", "Gender", ["Male", "Female", "Other"]) }}</div>
-                <div class="col-md-6">{{ form.input("phone", "Phone", "tel", "Phone number", "", True) }}</div>
-                <div class="col-md-6">{{ form.input("email", "Email", "email", "Optional email") }}</div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Symptoms</label>
-                <textarea class="form-control" rows="4" placeholder="Cough, fever, shortness of breath..."></textarea>
-            </div>
-            {{ button.primary("Save patient", "check2", "button") }}
-        </form>
-    </div>
-</div>
 {% endblock %}

@@ -1,0 +1,15 @@
+.git
+.gitignore
+
+.venv
+__pycache__
+*.pyc
+
+.env
+
+.ipynb_checkpoints
+
+backend/static/uploads/*
+!backend/static/uploads/.gitkeep
+
+tests/

@@ -7,47 +7,237 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="mb-4">
-    <h2 class="page-title mb-1">New Scan</h2>
-    <p class="text-muted mb-0">Upload a chest X-ray and attach it to an existing patient record.</p>
+
+    <h2 class="page-title mb-1">
+        New Scan
+    </h2>
+
+    <p class="text-muted mb-0">
+        Upload a chest X-ray and attach it to an existing patient record.
+    </p>
+
 </div>
+
+
+<!-- Flash Messages -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+{% if messages %}
+
+    {% for category, message in messages %}
+
+        <div class="alert alert-{{ category }} alert-dismissible fade show">
+
+            {{ message }}
+
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+            </button>
+
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+
+{% endwith %}
+
+
+<form
+    method="POST"
+    enctype="multipart/form-data">
 
 <div class="row g-4">
+
+    <!-- Upload Card -->
+
     <div class="col-lg-7">
-        <div class="card h-100">
-            <div class="card-body">
-                <label class="form-label">Patient</label>
-                <select class="form-select mb-3">
-                    <option>Jane Smith - LS-1002</option>
-                    <option>John Doe - LS-1001</option>
-                    <option>Alex Johnson - LS-1003</option>
-                </select>
 
-                <label class="upload-zone" for="scanFile">
-                    <i class="bi bi-cloud-arrow-up"></i>
-                    <strong>Choose X-ray image</strong>
-                    <span>PNG, JPG, or JPEG up to 16 MB</span>
+        <div class="card h-100 shadow-sm">
+
+            <div class="card-body">
+
+                <label class="form-label fw-semibold">
+
+                    Patient
+
                 </label>
-                <input class="d-none" id="scanFile" type="file" accept=".png,.jpg,.jpeg">
 
-                <a class="btn btn-primary mt-3" href="{{ url_for('prediction.prediction_result') }}">
-                    <i class="bi bi-magic me-2"></i>Run demo analysis
-                </a>
+                <!-- Dynamic in next phase -->
+
+            <select
+    class="form-select mb-4"
+    name="patient_id"
+    required>
+
+    <option value="" selected disabled>
+
+        Select Patient
+
+    </option>
+
+    {% for patient in patients %}
+
+    <option
+        value="{{ patient.patient_id }}">
+
+        {{ patient.patient_code }}
+        -
+        {{ patient.full_name }}
+
+    </option>
+
+    {% endfor %}
+
+</select>
+
+                <label
+                    class="upload-zone"
+                    for="scanFile">
+
+                    <i class="bi bi-cloud-arrow-up display-5"></i>
+
+                    <strong class="d-block mt-2">
+
+                        Choose Chest X-ray
+
+                    </strong>
+
+                    <span>
+
+                        PNG, JPG or JPEG (Maximum 16 MB)
+
+                    </span>
+
+                </label>
+
+
+                <input
+
+                    class="d-none"
+
+                    id="scanFile"
+
+                    name="xray"
+
+                    type="file"
+
+                    accept="image/png,image/jpeg,image/jpg"
+
+                    required>
+
+
+                <div
+                    id="selectedFile"
+                    class="small text-success mt-3 fw-semibold">
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary mt-4">
+
+                    <i class="bi bi-cpu me-2"></i>
+
+                    Analyze Image
+
+                </button>
+
             </div>
+
         </div>
+
     </div>
+
+
+    <!-- Checklist -->
+
     <div class="col-lg-5">
-        <div class="card h-100">
+
+        <div class="card h-100 shadow-sm">
+
             <div class="card-body">
-                <h3 class="h5">Review checklist</h3>
-                <ul class="list-unstyled mt-3 mb-0 checklist">
-                    <li><i class="bi bi-check-circle"></i> Confirm patient identity</li>
-                    <li><i class="bi bi-check-circle"></i> Use frontal chest X-ray images</li>
-                    <li><i class="bi bi-check-circle"></i> Review AI output clinically</li>
-                    <li><i class="bi bi-check-circle"></i> Generate report after validation</li>
+
+                <h4 class="h5">
+
+                    Review Checklist
+
+                </h4>
+
+                <ul class="list-unstyled mt-4 checklist">
+
+                    <li>
+
+                        <i class="bi bi-check-circle-fill text-success"></i>
+
+                        Confirm patient identity
+
+                    </li>
+
+                    <li>
+
+                        <i class="bi bi-check-circle-fill text-success"></i>
+
+                        Upload frontal chest X-ray
+
+                    </li>
+
+                    <li>
+
+                        <i class="bi bi-check-circle-fill text-success"></i>
+
+                        AI prediction supports clinical decision
+
+                    </li>
+
+                    <li>
+
+                        <i class="bi bi-check-circle-fill text-success"></i>
+
+                        Review confidence before generating report
+
+                    </li>
+
                 </ul>
+
             </div>
+
         </div>
+
     </div>
+
 </div>
+
+</form>
+
+
+<script>
+
+const input = document.getElementById("scanFile");
+
+const label = document.getElementById("selectedFile");
+
+input.addEventListener("change", function(){
+
+    if(this.files.length){
+
+        label.textContent =
+            "Selected File : " + this.files[0].name;
+
+    }
+    else{
+
+        label.textContent = "";
+
+    }
+
+});
+
+</script>
+
 {% endblock %}
